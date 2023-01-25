@@ -11,7 +11,6 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 - Microsoft Azure (Virtual Machines/Compute)
 - Remote Desktop
 - Active Directory Domain Services
-- PowerShell
 
 <h2>Operating Systems Used</h2>
 
@@ -60,12 +59,48 @@ Once Active Directory is installed, look in the top right corner for a yellow ex
 <br />
 
 <p>
-<img src="https://i.ibb.co/j5pBbqq/step6.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.ibb.co/j5pBbqq/step6.png" height="50%" width="50%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-<img src="https://i.ibb.co/GddHrzW/step7.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.ibb.co/GddHrzW/step7.png" height="50%" width="50%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Now that Active Directory is setup we are going to create a few users. Go to "Active Directory Users and Computers" and create an Organizational Unit called "_EMPLOYEES". Inside the employees folder create an employee with your name and username as "yourname.admin". Example: "edward.admin". Next add that employee to the "Domain Admins" security group.
+<img src="https://i.ibb.co/qgbLLnZ/step9.png" height="50%" width="50%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Now that Active Directory is setup we are going to create a few users. Go to "Active Directory Users and Computers" and create an Organizational Unit called "_EMPLOYEES". Inside the employees folder create an employee with your name and username as "yourname.admin". Example: "edward.admin". Next add that employee to the "Domain Admins" security group. Now you should be able to log back into DC-1 with that admin account.
+</p>
+<br />
+
+<p>
+<img src="https://i.ibb.co/wyd5BkF/step3.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+<img src="https://i.ibb.co/QNj3tP8/step10.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Now lets create some non-Admin employees using the admin account. Next, create a new VM in Azure with windows 10 as the operating system. Make sure the VM is in the same resource group and Vnet as DC-1. Name the VM client-1. Once the VM is created, in Azure set Client-1's DNS settings to DC-1's Private IP address. Go to client-1's network interface settings, click Dns severs, click custom, then enter DC-1's private IP.
+</p>
+<br />
+
+<p>
+<img src="https://i.ibb.co/gz6pFch/step11.png" height="50%" width="50%"    alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Now we need to join client-1 to the domain we created (campbell.com). This will allow our created users/employees to login using client-1. Login to client-1, go to system, then "rename this PC(advanced), click change, and enter the domain(campbell.com) you created in the domain field. You will need to enter the admin credentials we created on DC-1, Example(edward.admin@campbell.com). If done correctly, you should get a welcome to domain pop-up message and a prompt to restart the VM.
+</p>
+<br />
+
+<p>
+<img src="https://i.ibb.co/SVtKZqF/step12.png" height="50%" width="50%"    alt="Disk Sanitization Steps"/>
+</p>
+<p>
+<img src="https://i.ibb.co/HDbyM42/step13.png" height="50%" width="50%"    alt="Disk Sanitization Steps"/>
+</p>
+<p>
+<img src="https://i.ibb.co/B2XGJ1v/step14.png" height="50%" width="50%"    alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Lastly, we need to allow non-Admin users access to remote desktop. login to client-1 using the admin account. Next, go to system, then click "remote desktop", then allow "domain users". The Active Directory is now completely setup and users can login remotly using client-1.
 </p>
 <br />
