@@ -30,7 +30,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 <img src="https://i.ibb.co/jJKvbqb/step1.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-The first thing we are going to do is setup the Domain Contoller which is a Windows 2022 server. In Azure create a VM with the "Windows 2022 datacenter server" as the operating system and name it DC-1. Set the region to where ever is closest to you. Lastly, make sure your VM has at least 2 virtual CPUs, create a username and password, and press create.
+The first thing we are going to do is set up the Domain Controller which is a Windows 2022 server. In Azure create a VM with the "Windows 2022 datacenter server" as the operating system and name it DC-1. Set the region to where ever is closest to you. Lastly, make sure your VM has at least 2 virtual CPUs, create a username and password, and press create.
 </p>
 <br />
 
@@ -54,7 +54,7 @@ Now we will install Active Directory on DC-1. Login to Dc-1 with remote desktop.
 <img src="https://i.ibb.co/HCPz08j/step5.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Once Active Directory is installed, look in the top right corner for a yellow exclamation mark notification. Click it, then press "Promote this server to a domain controller. Next, click add a new forest, then create a domain. My domain is "campbell.com" which is my last name. After DC-1 restarts, log back in using your domain name and login user name. Example: "labuser@campbell.com" or "campbell.com\labuser".
+Once Active Directory is installed, look in the top right corner for a yellow exclamation mark notification. Click it, then press "Promote this server to a domain controller". Next, click add a new forest, then create a domain. My domain is "campbell.com" which is my last name. After DC-1 restarts, log back in using your domain name and login user name. Example: "labuser@campbell.com" or "campbell.com\labuser".
 </p>
 <br />
 
@@ -68,7 +68,7 @@ Once Active Directory is installed, look in the top right corner for a yellow ex
 <img src="https://i.ibb.co/qgbLLnZ/step9.png" height="50%" width="50%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Now that Active Directory is setup we are going to create a few users. Go to "Active Directory Users and Computers" and create an Organizational Unit called "_EMPLOYEES". Inside the employees folder create an employee with your name and username as "yourname.admin". Example: "edward.admin". Next add that employee to the "Domain Admins" security group. Now you should be able to log back into DC-1 with that admin account.
+Now that Active Directory is set up we are going to create a few users. Go to "Active Directory Users and Computers" and create an Organizational Unit called "_EMPLOYEES". Inside the _Employees folder create an employee with your name and username as "yourname.admin". Example: "edward.admin". Next, add that employee to the "Domain Admins" security group. Now you should be able to log back into DC-1 with that admin account.
 </p>
 <br />
 
@@ -79,7 +79,7 @@ Now that Active Directory is setup we are going to create a few users. Go to "Ac
 <img src="https://i.ibb.co/QNj3tP8/step10.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Now lets create some non-Admin employees using the admin account. Next, create a new VM in Azure with windows 10 as the operating system. Make sure the VM is in the same resource group and Vnet as DC-1. Name the VM client-1. Once the VM is created, in Azure set Client-1's DNS settings to DC-1's Private IP address. Go to client-1's network interface settings, click Dns severs, click custom, then enter DC-1's private IP.
+Now let's create some non-Admin employees using the admin account. Once done, create a new VM in Azure with windows 10 as the operating system. Make sure the VM is in the same resource group and Vnet as DC-1. Name the VM client-1. Once the VM is created, in Azure set Client-1's DNS settings to DC-1's Private IP address. Go to client-1's network interface settings, click "DNS Severs", click custom, then enter DC-1's private IP.
 </p>
 <br />
 
@@ -87,7 +87,7 @@ Now lets create some non-Admin employees using the admin account. Next, create a
 <img src="https://i.ibb.co/gz6pFch/step11.png" height="50%" width="50%"    alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Now we need to join client-1 to the domain we created (campbell.com). This will allow our created users/employees to login using client-1. Login to client-1, go to system, then "rename this PC(advanced), click change, and enter the domain(campbell.com) you created in the domain field. You will need to enter the admin credentials we created on DC-1, Example(edward.admin@campbell.com). If done correctly, you should get a welcome to domain pop-up message and a prompt to restart the VM.
+Now we need to join client-1 to the domain we created (campbell.com). This will allow our created users/employees to login using client-1. Login to client-1, go to system, then click "Rename This PC(Advanced)", next click change, and enter the domain(campbell.com) you created in the domain field. You will need to enter the admin credentials we created on DC-1, Example(edward.admin@campbell.com). If done correctly, you should get a welcome to this domain pop-up message and a prompt to restart the VM.
 </p>
 <br />
 
