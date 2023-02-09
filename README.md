@@ -5,6 +5,10 @@
 <h1>Active Directory Deployed in the Cloud (Azure)</h1>
 This tutorial outlines the implementation of Active Directory within Azure Virtual Machines.<br />
 
+<h2>Video Demonstration</h2>
+
+- ### [YouTube: How to Setup Active Directory using Microsoft Azure.](https://www.youtube.com/watch?v=CHO33aQHrXU)
+
 
 <h2>Environments and Technologies Used</h2>
 
